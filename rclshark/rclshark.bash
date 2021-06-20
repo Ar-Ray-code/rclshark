@@ -6,5 +6,5 @@ source $HOME/.bashrc
 source /opt/ros/foxy/setup.bash
 source $ROS2_WS/install/local_setup.bash
 
-python3 $ROS2_WS/src/rclshark/scripts/rclshark.py
+python3 $ROS2_WS/src/rclshark/rclshark/scripts/rclshark.py
 wait

@@ -22,7 +22,7 @@ fi
 if [ $# -eq 1 ]; then
     if [ "uninstall" = $1 ]; then
         echo "uninstall ..."
-        for service_files in $INSTALL_DIR/$TARGET_DIR/service/*.service ; do
+        for service_files in $INSTALL_DIR/$TARGET_DIR/$TARGET_DIR/service/*.service ; do
             FILE=`basename $service_files`
 
             systemctl disable $FILE
@@ -41,7 +41,7 @@ fi
 
 cp -r $PROJECT_DIR/ $INSTALL_DIR/
 
-for service_files in $INSTALL_DIR/$TARGET_DIR/service/*.service ; do
+for service_files in $INSTALL_DIR/$TARGET_DIR/$TARGET_DIR/service/*.service ; do
     FILE=`basename $service_files`
     echo "setting "$FILE"..."
 

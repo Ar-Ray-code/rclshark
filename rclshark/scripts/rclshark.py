@@ -51,7 +51,12 @@ class sub_empty(Node):
 
     def get_pc_status(self):
         status = PcStatus()
-        status.core_temp = int(psutil.sensors_temperatures()['coretemp'][0][1])
+        try:
+                status.core_temp = int(psutil.sensors_temperatures()['coretemp'][0][1])
+        except KeyError as err:
+                status.core_temp = int(psutil.sensors_temperatures()['cpu_thermal'][0][1])
+        except:
+                status.core_temp = 0
         status.cpu_percent = int(psutil.cpu_percent(interval=0.1))
         status.disk_percent = int(psutil.disk_usage('/').percent)
         status.ip_address = self.ip_get_raw()

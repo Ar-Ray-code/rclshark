@@ -34,7 +34,7 @@ class sub_empty(Node):
             except KeyError as err:
                 pass
                 
-        return "ip_"+str(result[0])
+        return "ip_"+str(result[0])+"_end"
 
     def ip_get_raw(self):
         result = []

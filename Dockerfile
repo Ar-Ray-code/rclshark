@@ -36,11 +36,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # =============
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y supervisor iproute2 python3-psutil
 
+RUN rm -rf ${ROS_WS}
 RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${ROS_WS}/src/rclshark
 
 RUN . ${ROS_ROOT}/setup.sh && cd ${ROS_WS} && colcon build --symlink-install
-# RUN . ${ROS_WS}/install/local_setup.sh
 RUN ${ROS_WS}/src/rclshark/rclshark/supervisor/install_docker.sh
 
-COPY ${ROS_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
+RUN cp ${ROS_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 CMD ["/usr/bin/supervisord"]

@@ -45,4 +45,4 @@ RUN ${ROS_WS}/src/rclshark/rclshark/supervisor/install_docker.sh
 
 RUN cp ${ROS_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 RUN wget https://raw.githubusercontent.com/Ar-Ray-code/setup_ros_env/master/ros2_init.bash
-CMD ["/usr/bin/supervisord"]
+RUN echo "supervisord &" >> ~/.bashrc

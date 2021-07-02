@@ -9,7 +9,9 @@ Monitors the status of computers on a network using the DDS function of ROS2.
   - psutil
   - netifaces
 
-## Installation (Startup Automatically )
+## Backend installation 
+
+### Installation (Startup Automatically)
 
 ```bash
 $ source /opt/ros/foxy/setup.bash
@@ -23,7 +25,13 @@ $ sudo bash install.bash
 $ sudo reboot
 ```
 
-## Installation (Startup manually)
+### uninstall
+
+```bash
+$ sudo bash ~/ros2_ws/src/rclshark/rclshark/install.bash uninstall
+```
+
+## Run as ROS2 RUN
 
 ```bash
 $ source /opt/ros/foxy/setup.bash
@@ -36,11 +44,19 @@ $ source ~/ros2_ws/install/local_setup.bash
 $ ros2 run rclshark rclshark
 ```
 
-## uninstall
+## Docker
 
 ```bash
-$ sudo bash ~/ros2_ws/src/rclshark/rclshark/install.bash uninstall
+$ docker build https://github.com/Ar-Ray-code/rclshark.git rclshark
 ```
+
+RUN docker container
+```bash
+$ docker run -it rclshark /bin/bash
+```
+
+
+
 
 ## About writer
 

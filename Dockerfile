@@ -40,7 +40,7 @@ RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${ROS_WS}/
 
 RUN . ${ROS_ROOT}/setup.sh && cd ${ROS_WS} && colcon build --symlink-install
 # RUN . ${ROS_WS}/install/local_setup.sh
-RUN ${ROS_WS}/src/rclshark/rclshark/install.sh
+RUN ${ROS_WS}/src/rclshark/rclshark/supervisor/install_docker.sh
 
 COPY ${ROS_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 CMD ["/usr/bin/supervisord"]

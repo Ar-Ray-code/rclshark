@@ -1,6 +1,0 @@
-#!/bin/bash
-. /opt/ros/foxy/setup.bash
-. $1/install/local_setup.bash
-
-python3 ./rclshark_smi_main.py
-wait

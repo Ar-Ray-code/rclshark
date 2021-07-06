@@ -2,8 +2,6 @@
 import subprocess
 import os
 import re
-import signal
-import time
 import threading
 import sys
 import select
@@ -26,6 +24,7 @@ ip_list = list()
 
 # ==========================================================
 
+# Call one service
 class using_srv(Node):
     def __init__(self, _ip:str):
         self.ip = _ip
@@ -39,14 +38,14 @@ class using_srv(Node):
 
     def reset_client(self) -> bool:
         self.get_status = self.create_client(PcStatusSrv, '/'+self.sub_pc_0)
-        if not self.get_status.wait_for_service(timeout_sec=0.2):
-            self.get_logger().info('service not available, waiting again...')
+        if not self.get_status.service_is_ready():
+            self.get_logger().info('service not available')
             return 1
         self.req = PcStatusSrv.Request()
         return 0
         
     def get_by_service(self):
-        self.req.trigger = False
+        self.req.system_ctrl = 0
         self.future = self.get_status.call_async(self.req)
 
 class srv_main:
@@ -64,21 +63,17 @@ class srv_main:
             rclpy.spin_once(self.ros_class)
             if self.ros_class.future.done():
                 try:
-                    self.ros_class.future.result().callback_status.cpu_percent
                     global_data.append(self.ros_class.future.result().callback_status)
                     rclpy.spin_once(self.ros_class)
-                except Exception as e:
-                    print(e)
-            # break
+                except Exception:
+                    return 1
         return 0
 
 def show_data():
-    global_data
-
     print("+============================================================================+")
     print("| RCLSHARK-SMI " + version_build + "\t" + "ROS-DISTRO " + os.environ['ROS_DISTRO'] + "\t\t\t\t\t     |")
     print("|============================================================================|")
-    print("| ip_address\tcpu(%)\ttmp(*C)\tmem(%)\tdisk(%)\tps-cnt\t\t\t     |")
+    print("| ip_address\t\tcpu(%)\ttmp(*C)\tmem(%)\tdisk(%)\tps-cnt\t\t     |")
     print("|============================================================================|")
     terminal_col = 5
 
@@ -87,24 +82,26 @@ def show_data():
         data.local_tag = ip_data
 
     for data in sorted(global_data, reverse=False, key=lambda x: x.local_tag):
-        print_status = "| "+ data.ip_address + "\t" + str(data.cpu_percent).rjust(5) + "\t" + str(data.core_temp).rjust(5) + "\t" + str(data.mem_percent).rjust(5) + "\t" + str(data.disk_percent).rjust(5) + "\t" + str(data.process_count).rjust(5) + "\t\t\t" + "     |"
+        print_status = "| "+ data.ip_address + "\t\t" + str(data.cpu_percent).rjust(5) + "\t" + str(data.core_temp).rjust(5) + "\t" + str(data.mem_percent).rjust(5) + "\t" + str(data.disk_percent).rjust(5) + "\t" + str(data.process_count).rjust(5) + "\t\t" + "     |"
         print(print_status)
         terminal_col = terminal_col + 1
 
-    for i in range(22 - terminal_col):
+    for i in range(20 - terminal_col):
         print("|\t\t\t\t\t\t\t\t\t     |")
+    print("|============================================================================|")
+    print("| Press 'q'-> Enter Key to quit                                              |")
     print("+============================================================================+")
 
-def get_from_srv(srv_list:list, _ip_list:list):
+def get_from_srv(_srv_list:list, _ip_list:list):
     # get data from srv_list
-    for i in range(len(srv_list)):
+    for i in range(len(_srv_list)):
         try:
-            out = srv_list[i].using_srv_fnc()
+            out = _srv_list[i].using_srv_fnc()
             if(out):
-                _ip_list.remove(srv_list[i].ip)
+                _ip_list.remove(_srv_list[i].ip)
         except:
             pass
-    return srv_list, _ip_list
+    return _srv_list, _ip_list
 
 def get_ip_list() -> list:
     try:
@@ -140,7 +137,6 @@ def ros_main(args = None):
     global ip_list
     global srv_list
     rclpy.init(args=args)
-    signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     while rclpy.ok():
         
@@ -153,10 +149,13 @@ def ros_main(args = None):
             ip_list.clear()
             for srv in srv_class_list:
                 del srv
+            print("Timeout Error")
             exit(1)
+
         if input_timeout(0.1) == 'q':
-            exit(1)
-            
+            print("quit")
+            exit(0)
+
         del t
     rclpy.shutdown()
 

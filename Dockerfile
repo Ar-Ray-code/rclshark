@@ -3,8 +3,6 @@
 FROM ros:foxy-ros-core-focal
 
 ENV ROS_DISTRO=foxy
-ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
-ENV ROS_WS=/.service_ws
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -34,15 +32,33 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-foxy-ros-base=0.9.2-1* \
     && rm -rf /var/lib/apt/lists/*
 
-# =============
-RUN apt-get -y update && apt-get -y upgrade && apt-get install -y supervisor iproute2 python3-psutil
+# RCLSHARK SETUP ===============================================================
+## setup rclshark env
+ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
 
-RUN rm -rf ./${ROS_WS}
-RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${ROS_WS}/src/rclshark
+ENV TARGET_DIR='rclshark'
+ENV INSTALL_DIR='/opt'
+ENV COMPUTER_MSGS_VERSION='v1.0.0'
+ENV RCLSHARK_WS=${INSTALL_DIR}'/'${TARGET_DIR}'/'${TARGET_DIR}'_ws/'
 
-RUN . ${ROS_ROOT}/setup.sh && cd ${ROS_WS} && colcon build --symlink-install
-RUN ${ROS_WS}/src/rclshark/rclshark/supervisor/install_docker.sh
+## apt install tools
+RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
+    supervisor \
+    iproute2 \
+    python3-psutil \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN cp ${ROS_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
+## git clone rclshark
+RUN rm -rf ./${INSTALL_DIR}/${TARGET_DIR}
+RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/
+RUN mv ${RCLSHARK_WS}/rclshark/ ${RCLSHARK_WS}/src/
+## colcon build
+RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
+RUN ${RCLSHARK_WS}/src/rclshark/supervisor/install_docker.sh
+
+## setup ros_env
 RUN wget https://raw.githubusercontent.com/Ar-Ray-code/setup_ros_env/master/ros2_init.bash
+
+## setup supervisord
+RUN cp ${RCLSHARK_WS}/src/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 RUN echo "supervisord &" >> ~/.bashrc

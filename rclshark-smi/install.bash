@@ -1,4 +1,0 @@
-#!/bin/bash
-
-LOCAL_ROS_DISTRO=$ROS_DISTRO
-

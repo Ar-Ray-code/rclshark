@@ -47,7 +47,7 @@ $ ros2 run rclshark rclshark
 ## Docker
 
 ```text
-$ docker build https://github.com/Ar-Ray-code/rclshark.git#main -t rclshark
+$ docker build https://github.com/Ar-Ray-code/rclshark.git#main --tag rclshark:local
 ```
 
 RUN docker container

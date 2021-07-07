@@ -2,7 +2,7 @@
 Descripton=ROS2 IP Publisher Start
 
 [Service]
-ExecStart=/bin/bash /opt/rclshark/rclshark.bash
+ExecStart=/bin/bash /opt/rclshark_ws/src/rclshark/rclshark/rclshark.bash
 
 Type=simple
 

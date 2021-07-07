@@ -50,7 +50,6 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
 
 ## git clone rclshark
 RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
-RUN mv ${RCLSHARK_WS}/src/rclshark/rclshark/ ${RCLSHARK_WS}/src/rclshark/
 ## colcon build
 RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
 RUN ${RCLSHARK_WS}/src/rclshark/supervisor/install_docker.sh

@@ -35,7 +35,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # RCLSHARK SETUP ===============================================================
 ## setup rclshark env
 ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
-
 ENV TARGET_DIR='rclshark'
 ENV INSTALL_DIR='/opt'
 ENV COMPUTER_MSGS_VERSION='v1.0.0'
@@ -48,14 +47,11 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
     python3-psutil \
     && rm -rf /var/lib/apt/lists/*
 
-## git clone rclshark
-RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
-## colcon build
-RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
-
 ## setup ros_env
 RUN wget https://raw.githubusercontent.com/Ar-Ray-code/setup_ros_env/master/ros2_init.bash
 
-## setup supervisord
+## git clone rclshark
+RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
+RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
 RUN cp ${RCLSHARK_WS}/src/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 RUN echo "supervisord &" >> ~/.bashrc

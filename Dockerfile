@@ -48,7 +48,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## git clone rclshark
-RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
+RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src/rclshark/
 RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
 RUN cp ${RCLSHARK_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 RUN echo "supervisord &" >> ~/.bashrc

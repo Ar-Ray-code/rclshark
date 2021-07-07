@@ -39,7 +39,7 @@ ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
 ENV TARGET_DIR='rclshark'
 ENV INSTALL_DIR='/opt'
 ENV COMPUTER_MSGS_VERSION='v1.0.0'
-ENV RCLSHARK_WS=${INSTALL_DIR}'/'${TARGET_DIR}'/'${TARGET_DIR}'_ws/'
+ENV RCLSHARK_WS=${INSTALL_DIR}/${TARGET_DIR}/${TARGET_DIR}'_ws'
 
 ## apt install tools
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
@@ -49,9 +49,8 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## git clone rclshark
-RUN rm -rf ./${INSTALL_DIR}/${TARGET_DIR}
-RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/
-RUN mv ${RCLSHARK_WS}/rclshark/ ${RCLSHARK_WS}/src/
+RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
+RUN mv ${RCLSHARK_WS}/src/rclshark/rclshark/ ${RCLSHARK_WS}/src/rclshark/
 ## colcon build
 RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
 RUN ${RCLSHARK_WS}/src/rclshark/supervisor/install_docker.sh

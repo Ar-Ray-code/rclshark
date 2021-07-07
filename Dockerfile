@@ -52,7 +52,6 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
 RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src
 ## colcon build
 RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
-RUN ${RCLSHARK_WS}/src/rclshark/supervisor/install_docker.sh
 
 ## setup ros_env
 RUN wget https://raw.githubusercontent.com/Ar-Ray-code/setup_ros_env/master/ros2_init.bash

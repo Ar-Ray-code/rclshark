@@ -5,6 +5,7 @@ import re
 import threading
 import sys
 import select
+import datetime
 
 import rclpy
 from rclpy.node import Node
@@ -12,8 +13,8 @@ from rclpy.node import Node
 from computer_msgs.msg import PcStatus
 from computer_msgs.srv import PcStatusSrv
 
-version_mejor = 0
-version_minor = 1
+version_mejor = 1
+version_minor = 0
 version_revision = 0
 version_build = str(version_mejor) + "." + str(version_minor) + "." + str(version_revision)
 
@@ -71,7 +72,7 @@ class srv_main:
 
 def show_data():
     print("+----------------------------------------------------------------------------+")
-    print("| RCLSHARK-SMI " + version_build + "\t" + "ROS-DISTRO " + os.environ['ROS_DISTRO'] + "\t\t\t\t\t     |")
+    print("| RCLSHARK-SMI " + version_build + "\t" + "ROS-DISTRO " + os.environ['ROS_DISTRO'] + "\t\t" + datetime.datetime.now().isoformat(timespec='seconds') + "\t     |")
     print("|============================================================================|")
     print("| ip_address\t\tcpu(%)\ttmp(*C)\tmem(%)\tdisk(%)\tps-cnt\t\t     |")
     print("|============================================================================|")

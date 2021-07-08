@@ -6,10 +6,13 @@ Monitor the status of computers on a network using the DDS function of ROS2.
 
 ## Requirements
 
-- ROS2 foxy
-- Python 3.8 or later
+- ROS2 foxy-core [Installation](https://docs.ros.org/en/foxy/Installation.html)
 
-## RUN rclshark
+## rclshark
+
+rclshark is an IP address display system that takes advantage of the DDS publishing nature of the ros2 node to the local network, and can recognize any device with ROS2 installed.
+
+It can recognize any device with ROS2 installed. rclshark is also a service server, and has a function to report computer status using psutil. See rclshark-smi for details.
 
 
 ### Usage 1 : Run as ROS2 RUN
@@ -52,19 +55,65 @@ $ docker build https://github.com/Ar-Ray-code/rclshark.git#main --tag rclshark:l
 
 RUN docker container
 ```bash
-$ docker run -it rclshark /bin/bash
+$ docker run -it --rm rclshark:local
 ```
 
+### 確認方法
 
+Since rclshark is an application that uses the basic functions of ROS2, you can find it with the ros2 command.
+
+```bash
+## 確認方法1
+$ ros2 node list | grep ip_
+> /ip_192.168.11.10_end
+> /ip_192.168.11.22_end
+## 確認方法2
+$ ros2 service list | grep endcb
+> /ip_192.168.11.10_endcb
+> /ip_192.168.11.22_endcb
+```
+
+Now you can safely forget your IP address.:wink:
 
 ## rclshark-smi:shark:
 
 You can use rclshark to check the hardware status of multiple computers. You don't even need to bother opening htop. Good for you! :blush:
 
+IP addresses are sorted in ascending order and are dynamically added and removed. See Usage 2 for installing rclshark-smi. If you want to use only rclshark-smi, type `sudo systemctl disable rclshark.service`. to use only rclshark-smi.
+
+![rclshark-smi-docker](images_for_readme/rclshark-smi-docker.png)
+
+起動方法は次の2通りです。
+
+Usage 1 : Run from direct path
+
+```bash
+$ source <workspace-path>/install/setup.bash
+$ python3 <path-to-rclshark>/rclshark-smi/rclshark-smi.py
+```
+
+Usage 2 : Run from `/usr/local/bin/rclshark-smi`
+
+```bash
+## Install
+$ git clone https://github.com/Ar-Ray-code/rclshark.git
+$ sudo bash rclshark/rclshark/install.bash foxy
+$ sudo systemctl disable rclshark.service
+## Run rclshark-smi
+$ rclshark-smi
+```
+
+### Operation method
+
+- 'q'-> Enter : exit rclshark-smi
+
+### Known Problems:disappointed:
+
+- If the rclshark process started using Docker is interrupted, rclshark-smi will freeze. In that case, rclshark-smi will exit with a TimeoutError after 5 seconds. Keep in mind that the same event can also happen with non-Docker rclshark.
+- We are considering releasing a lightweight version of rclshark-smi that does not involve sending or receiving messages.
 
 
-
-## About writer :turtle:
+## About writer :turtle::shark:
 
 - Ar-Ray : Japanese student.
 - Blog (Japanese) : https://ar-ray.hatenablog.com/

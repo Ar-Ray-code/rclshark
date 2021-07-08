@@ -1,13 +1,13 @@
 from setuptools import setup
 
-package_name = 'rclshark'
+package_name = 'rclshark-smi'
 
 setup(
     name=package_name,
     version='1.0.0',
     packages=[],
     py_modules= [
-        'scripts.rclshark',
+        'scripts.rclshark_smi',
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -22,12 +22,12 @@ setup(
         'Programming Language :: Python',
         'Topic :: Software Development',
     ],
-    description='Service server for finding the ip address of a computer.',
+    description='Monitor application that displays rclshark information on a terminal.',
     license='Apache License, Version 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'rclshark = scripts.rclshark:ros_main',
+            'rclshark_smi = scripts.rclshark_smi:ros_main',
         ],
     }
 )

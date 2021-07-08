@@ -51,7 +51,7 @@ if [ -z $ROS_DISTRO ]; then
 fi
 
 mkdir -p $RCLSHARK_WS/src
-cp -r $PROJECT_DIR/../../rclshark/ $RCLSHARK_WS/src/rclshark/
+cp -r $PROJECT_DIR/../rclshark/ $RCLSHARK_WS/src/rclshark/
 cd $RCLSHARK_WS/src/rclshark/ && git clone https://github.com/Ar-Ray-code/computer_msgs -b $COMPUTER_MSGS_VERSION
 
 cd $RCLSHARK_WS && colcon build --symlink-install

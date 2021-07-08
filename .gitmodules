@@ -1,3 +1,6 @@
 [submodule "computer_msgs"]
 	path = computer_msgs
 	url = https://github.com/Ar-Ray-code/computer_msgs.git
+[submodule "rclshark-smi"]
+	path = rclshark-smi
+	url = https://github.com/Ar-Ray-code/rclshark-smi.git

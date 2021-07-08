@@ -4,15 +4,23 @@ Monitor the status of computers on a network using the DDS function of ROS2.
 
 <img src="images_for_readme/rclshark_swim.png" alt="rclshark_swim"  />
 
+## Documents
+
+- Zenn : https://zenn.dev/articles/9fd8cb5941bb94
+- DockerHub : https://hub.docker.com/r/ray255ar/rclshark
+- Computer_msgs : https://github.com/Ar-Ray-code/computer_msgs
+- rclshark-smi : https://github.com/Ar-Ray-code/rclshark-smi
+
 ## Requirements
 
-- ROS2 foxy-core [Installation](https://docs.ros.org/en/foxy/Installation.html)
+- ROS2 foxy-core -> [Installation](https://docs.ros.org/en/foxy/Installation.html)
 
 ## rclshark​ :turtle: :shark:
 
 rclshark is an IP address display system that takes advantage of the DDS publishing nature of the ros2 node to the local network, and can recognize any device with ROS2 installed.
+rclshark is also a service server, and has a function to report computer status using psutil.
 
-It can recognize any device with ROS2 installed. rclshark is also a service server, and has a function to report computer status using psutil. See rclshark-smi for details.
+See [rclshark-smi](https://github.com/Ar-Ray-code/rclshark#rclshark-smi-turtle-shark) for details.
 
 
 ### Usage 1 : Run as ROS2 RUN
@@ -49,8 +57,8 @@ $ sudo bash ~/ros2_ws/src/rclshark/rclshark/install.bash uninstall
 
 ### Usage 3 : Docker
 
-```text
-$ docker build https://github.com/Ar-Ray-code/rclshark.git#main --tag rclshark:local
+```bash
+$ docker pull ray255ar/rclshark:latest
 ```
 
 RUN docker container
@@ -63,11 +71,11 @@ $ docker run -it --rm rclshark:local
 Since rclshark is an application that uses the basic functions of ROS2, you can find it with the ros2 command.
 
 ```bash
-## 確認方法1
+## Confirmation rclshark 1
 $ ros2 node list | grep ip_
 > /ip_192.168.11.10_end
 > /ip_192.168.11.22_end
-## 確認方法2
+## Confirmation rclshark 2
 $ ros2 service list | grep endcb
 > /ip_192.168.11.10_endcb
 > /ip_192.168.11.22_endcb
@@ -85,10 +93,16 @@ IP addresses are sorted in ascending order and are dynamically added and removed
 
 There are two ways to run.
 
-### Usage 1 : Run from direct path
+### Usage 1 : Run as ROS2 RUN
 
 ```bash
-$ source <workspace-path>/install/setup.bash
+$ source /opt/ros/foxy/setup.bash
+$ mkdir -p ~/ros2_ws/src
+$ cd ~/ros2_ws/src
+$ git clone --recursive https://github.com/Ar-Ray-code/rclshark.git
+$ cd ~/ros2_ws/
+$ colcon build --symlink-install
+$ source ~/ros2_ws/install/local_setup.bash
 $ ros2 run rclshark-smi rclshark_smi.py
 ```
 
@@ -107,7 +121,7 @@ $ rclshark-smi
 
 - 'q'-> Enter : exit rclshark-smi
 
-### Known Problems:disappointed:
+### Known Problems​ ​(rclshark-smi) :disappointed:
 
 - If the rclshark process started using Docker is interrupted, rclshark-smi will freeze. In that case, rclshark-smi will exit as the Timeout after 5 seconds. Keep in mind that the same event can also happen with non-Docker rclshark.
 - We are considering releasing a lightweight version of rclshark-smi that does not involve sending or receiving messages.

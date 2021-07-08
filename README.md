@@ -7,6 +7,8 @@ Monitor the status of computers on a network using the DDS function of ROS2.
 ## Requirements
 
 - ROS2 foxy-core [Installation](https://docs.ros.org/en/foxy/Installation.html)
+- python3-colcon-common-extensions
+- build-essential
 
 ## rclshark​ :turtle: :shark:
 

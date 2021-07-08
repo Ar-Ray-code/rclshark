@@ -2,7 +2,7 @@
 
 Monitor the status of computers on a network using the DDS function of ROS2.
 
-<img src="images_for_readme/rclshark_swim.png" alt="rclshark_swim" style="zoom: 33%;" />
+<img src="images_for_readme/rclshark_swim.png" alt="rclshark_swim"  />
 
 ## Requirements
 
@@ -58,7 +58,7 @@ RUN docker container
 $ docker run -it --rm rclshark:local
 ```
 
-### 確認方法
+### Confirmation rclshark
 
 Since rclshark is an application that uses the basic functions of ROS2, you can find it with the ros2 command.
 
@@ -83,16 +83,16 @@ IP addresses are sorted in ascending order and are dynamically added and removed
 
 ![rclshark-smi-docker](images_for_readme/rclshark-smi-docker.png)
 
-起動方法は次の2通りです。
+There are two ways to run.
 
-Usage 1 : Run from direct path
+### Usage 1 : Run from direct path
 
 ```bash
 $ source <workspace-path>/install/setup.bash
-$ python3 <path-to-rclshark>/rclshark-smi/rclshark-smi.py
+$ ros2 run rclshark-smi rclshark_smi.py
 ```
 
-Usage 2 : Run from `/usr/local/bin/rclshark-smi`
+### Usage 2 : Run from `/usr/local/bin/rclshark-smi`
 
 ```bash
 ## Install
@@ -109,7 +109,7 @@ $ rclshark-smi
 
 ### Known Problems:disappointed:
 
-- If the rclshark process started using Docker is interrupted, rclshark-smi will freeze. In that case, rclshark-smi will exit with a TimeoutError after 5 seconds. Keep in mind that the same event can also happen with non-Docker rclshark.
+- If the rclshark process started using Docker is interrupted, rclshark-smi will freeze. In that case, rclshark-smi will exit as the Timeout after 5 seconds. Keep in mind that the same event can also happen with non-Docker rclshark.
 - We are considering releasing a lightweight version of rclshark-smi that does not involve sending or receiving messages.
 
 

@@ -6,7 +6,7 @@ Monitor the status of computers on a network using the DDS function of ROS2.
 
 ## Documents
 
-- Zenn : https://zenn.dev/articles/9fd8cb5941bb94
+- Zenn : https://zenn.dev/array/articles/9fd8cb5941bb94
 - DockerHub : https://hub.docker.com/r/ray255ar/rclshark
 - Computer_msgs : https://github.com/Ar-Ray-code/computer_msgs
 - rclshark-smi : https://github.com/Ar-Ray-code/rclshark-smi

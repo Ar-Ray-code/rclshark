@@ -119,6 +119,13 @@ $ sudo systemctl disable rclshark.service
 $ rclshark-smi
 ```
 
+## Demo
+
+[YouTube](https://youtu.be/SC5XEYPq4D0)
+
+![](images_for_readme/rclshark-demo.gif)
+
+
 ### Operation method
 
 - 'q'-> Enter : exit rclshark-smi

@@ -2,6 +2,8 @@
 
 Monitor the status of computers on a network using the DDS function of ROS2.
 
+開発者向けのツールで、リモートマシンへのSSHログインの際に必要なローカルIPアドレスを簡単に発見します。リモートマシンに対して拡張機能を追加し、CPU温度などのマシン内部の情報をログイン無しでモニタリングすることもできます
+
 <img src="images_for_readme/rclshark_swim.png" alt="rclshark_swim"  />
 
 ## Documents

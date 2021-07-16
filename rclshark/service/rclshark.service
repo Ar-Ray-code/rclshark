@@ -1,12 +1,12 @@
 [Unit]
 Descripton=ROS2 IP Publisher Start
 
-[Service]
-ExecStart=/bin/bash /opt/rclshark_ws/src/rclshark/rclshark/rclshark.bash
-Type=simple
-
 [Install]
 WantedBy=default.target
 
-# sudo cp ./rclshark.service /etc/systemd/system/rclshark.service
-# sudo systemctl enable rclshark.service
+[Service]
+ExecStart=/bin/bash /opt/rclshark_ws/src/rclshark/rclshark/rclshark.bash
+Type=simple
+Restart=on-failure
+
+# Be sure to leave a line feed.

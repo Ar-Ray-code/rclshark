@@ -1,8 +1,8 @@
 #!/bin/python3
 import rclpy
+from rclpy.logging import get_logger
 from rclpy.node import Node
 
-# from std_msgs.msg import Empty
 from computer_msgs.msg import PcStatus
 from computer_msgs.srv import PcStatusSrv
 
@@ -14,8 +14,8 @@ import socket
 
 class sub_empty(Node):
     def __init__(self):
-        super().__init__(self.ip_get())
-
+        super().__init__(self.ip_get(),enable_rosout=False)
+        
         service = self.create_service(PcStatusSrv,self.ip_get()+'cb',self.status_cb)
 
     def sub_number(self,data):
@@ -71,6 +71,7 @@ class sub_empty(Node):
 
 def ros_main(args = None):
     rclpy.init(args=args)
+    
     ros_class = sub_empty()
     rclpy.spin(ros_class)
 

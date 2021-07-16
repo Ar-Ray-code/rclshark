@@ -1,4 +1,6 @@
-# rclshark​ :turtle::shark: (Now : [v1.0.1](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.1))
+# rclshark​ :turtle::shark:
+
+latest : [v1.0.1](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.1)
 
 Monitor the status of computers on a network using the DDS function of ROS2.
 

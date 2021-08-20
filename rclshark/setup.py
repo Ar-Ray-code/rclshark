@@ -4,7 +4,7 @@ package_name = 'rclshark'
 
 setup(
     name=package_name,
-    version='1.0.1',
+    version='1.0.2',
     packages=['rclshark'],
     data_files=[
         ('share/ament_index/resource_index/packages',

@@ -58,10 +58,12 @@ class sub_empty(Node):
         except:
                 status.core_temp = 0
         status.cpu_percent = int(psutil.cpu_percent(interval=0.1))
-        status.disk_percent = int(psutil.disk_usage('/').percent)
+        # status.disk_percent = int(psutil.disk_usage('/').percent)
+        # status.process_count = int(len(psutil.pids()))
         status.ip_address = self.ip_get_raw()
         status.mem_percent = int(psutil.virtual_memory().percent)
-        status.process_count = int(len(psutil.pids()))
+        
+        status.user_name = os.environ.get("USER")
         
         return status
 
@@ -71,6 +73,8 @@ class sub_empty(Node):
 
 def ros_main(args = None):
     rclpy.init(args=args)
+
+    print(os.environ.get("USER"))
     
     ros_class = sub_empty()
     rclpy.spin(ros_class)

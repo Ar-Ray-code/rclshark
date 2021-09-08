@@ -32,7 +32,9 @@ class sub_empty(Node):
                     ip_data = ip.replace(".","_")
                     result.append(ip_data)
             except KeyError as err:
-                pass
+                ip_data = "0_0_0_0"
+                result.append(ip_data)
+                
                 
         return "ip_"+str(result[0])+"_end"
 
@@ -57,7 +59,7 @@ class sub_empty(Node):
                 status.core_temp = int(psutil.sensors_temperatures()['cpu_thermal'][0][1])
         except:
                 status.core_temp = 0
-        status.cpu_percent = int(psutil.cpu_percent(interval=0.1))
+        status.cpu_percent = int(psutil.cpu_percent(interval=0.5))
         # status.disk_percent = int(psutil.disk_usage('/').percent)
         # status.process_count = int(len(psutil.pids()))
         status.ip_address = self.ip_get_raw()
@@ -73,11 +75,12 @@ class sub_empty(Node):
 
 def ros_main(args = None):
     rclpy.init(args=args)
-
-    print(os.environ.get("USER"))
     
     ros_class = sub_empty()
-    rclpy.spin(ros_class)
+    try:
+        rclpy.spin(ros_class)
+    except KeyboardInterrupt:
+        pass
 
     ros_class.destroy_node()
     rclpy.shutdown()

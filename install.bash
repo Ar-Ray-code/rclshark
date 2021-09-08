@@ -13,6 +13,10 @@ COMPUTER_MSGS_VERSION='v1.0.1'
 RCLSHARK_SMI_VERSION='v1.0.1'
 BIN='/usr/local/bin'
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+_USER=${SCRIPT_DIR##*home/}
+USER=${_USER%%/*}
+
 RCLSHARK_WS=${INSTALL_DIR}'/'${TARGET_DIR}'_ws'
 
 ## Check superuser ======================================
@@ -55,10 +59,6 @@ fi
 
 mkdir -p $RCLSHARK_WS/src
 cp -r $PROJECT_DIR/../rclshark/ $RCLSHARK_WS/src/rclshark/
-cd $RCLSHARK_WS/src/rclshark/ && rm -rf computer_msgs
-cd $RCLSHARK_WS/src/rclshark/ && rm -rf rclshark-smi
-cd $RCLSHARK_WS/src/rclshark/ && git clone https://github.com/Ar-Ray-code/computer_msgs.git -b $COMPUTER_MSGS_VERSION
-cd $RCLSHARK_WS/src/rclshark/ && git clone https://github.com/Ar-Ray-code/rclshark-smi.git -b $RCLSHARK_SMI_VERSION
 
 cd $RCLSHARK_WS && colcon build --symlink-install
 
@@ -72,7 +72,7 @@ for service_file in $RCLSHARK_WS/src/rclshark/rclshark/service/*.service ; do
     cp $service_file /etc/systemd/system/
     systemctl enable $FILE
 done
-cp $RCLSHARK_WS/src/rclshark/rclshark-smi/rclshark-smi $BIN/rclshark-smi
+cp $RCLSHARK_WS/src/rclshark/rclshark-smi/rclshark-smi.bash $BIN/rclshark-smi
 chmod +x $BIN/rclshark-smi
 
 systemctl daemon-reload

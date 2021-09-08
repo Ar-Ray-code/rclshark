@@ -37,7 +37,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
 ENV TARGET_DIR='rclshark'
 ENV INSTALL_DIR='/opt'
-ENV COMPUTER_MSGS_VERSION='v1.0.0'
 ENV RCLSHARK_WS=${INSTALL_DIR}/${TARGET_DIR}'_ws'
 
 ## apt install tools
@@ -48,7 +47,8 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## git clone rclshark
-RUN git clone --recursive https://github.com/Ar-Ray-code/rclshark.git ${RCLSHARK_WS}/src/rclshark/
+RUN mkdir -p ${RCLSHARK_WS}/src/
+ADD . ${RCLSHARK_WS}/src/
 RUN . ${ROS_ROOT}/setup.sh && cd ${RCLSHARK_WS} && colcon build --symlink-install
-RUN cp ${RCLSHARK_WS}/src/rclshark/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
+RUN cp ${RCLSHARK_WS}/src/rclshark/supervisor/rclshark_supervisor.conf /etc/supervisor/conf.d/
 RUN echo "supervisord &" >> ~/.bashrc

@@ -66,7 +66,11 @@ class sub_empty(Node):
         status.ip_address = self.ip_get_raw()
         status.mem_percent = int(psutil.virtual_memory().percent)
         
-        status.user_name = os.environ.get("USER")
+        try:
+            status.user_name = os.environ.get("USER")
+        except AssertionError:
+        # user_name (string) is empty on docker
+            status.user_name = "docker?"
         
         return status
 

@@ -1,6 +1,6 @@
 # rclshark​ :turtle::shark:
 
-latest : [v1.0.1](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.1)
+latest : [v1.0.2](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.2)
 
 [解説（Zenn）](https://zenn.dev/array/articles/9fd8cb5941bb94)
 [紹介ページ（github.io）](https://ar-ray-code.github.io/05_rclshark/index.html)
@@ -54,7 +54,7 @@ $ ros2 run rclshark rclshark
 In case of`$ROS_DISTRO=foxy`,
 
 ```bash
-$ git clone https://github.com/Ar-Ray-code/rclshark.git
+$ git clone --recursive https://github.com/Ar-Ray-code/rclshark.git
 $ sudo bash rclshark/rclshark/install.bash foxy
 ```
 
@@ -69,7 +69,7 @@ $ sudo bash ~/ros2_ws/src/rclshark/rclshark/install.bash uninstall
 ### Usage 3 : Docker
 
 ```bash
-$ docker pull ray255ar/rclshark:latest
+$ docker pull ray255ar/rclshark
 ```
 
 RUN docker container

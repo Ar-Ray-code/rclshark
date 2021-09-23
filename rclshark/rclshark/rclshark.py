@@ -71,8 +71,32 @@ class sub_empty(Node):
         
         return status
 
+    def systemcall(self, system_ctrl:int, ctrl_param:int):
+        # Status list (0~127)
+
+        # 00 ~ 09 rclshark-command
+        #  0 reboot
+        #  1 shutdown
+        #  2 update
+
+        if (system_ctrl == 0):
+            pass
+        elif (system_ctrl == 1):
+            pass
+
+        # 10 ~ 19 pc-command
+        # 10 reboot
+        # 11 shutdown
+
+        # 20 ~ 29 
+        pass
+
     def status_cb(self, request, response:PcStatusSrv):
         response.callback_status = self.get_pc_status()
+
+        # get parameter
+        # syscall = response.Request.system_ctrl
+        # sysparam = response.Request.ctrl_param
         return response
 
 def ros_main(args = None):

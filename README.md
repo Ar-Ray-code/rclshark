@@ -177,6 +177,8 @@ python3 rclshark-web/flask_main.py
 
 Access `http://localhost:5000`
 
+[Web-GUI Demo Page](https://ar-ray-code.github.io/05_rclshark/rclshark-web/templates/index.html)
+
 ![rclshark-web-gui](images_for_readme/rclshark-web-gui.png)
 
 

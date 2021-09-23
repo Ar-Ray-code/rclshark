@@ -143,16 +143,7 @@ rclshark-smi
 
 ![](images_for_readme/rclshark-demo.gif)
 
-
-### Operation method
-
-- 'q'-> Enter : exit rclshark-smi
-
-### Known Problems​ ​(rclshark-smi < v1.0.1) :disappointed:
-
-- If the rclshark process started using Docker is interrupted, rclshark-smi will freeze. In that case, rclshark-smi will exit as the Timeout after 5 seconds. Keep in mind that the same event can also happen with non-Docker rclshark.
-- We are considering releasing a lightweight version of rclshark-smi that does not involve sending or receiving messages.
-- To temporarily solve these problems, rclshark-smi v1.0.2 limits the display to only one time.
+- rclshark-smi v1.0.2 limits the display to only one time.
 
 
 

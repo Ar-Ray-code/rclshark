@@ -69,7 +69,7 @@ After installation, rclshark will start automatically.
 
 ```bash
 #rclshark installation
-git clone --recursive https://github.com/Ar-Ray-code/rclshark.git
+git clone https://github.com/Ar-Ray-code/rclshark.git
 sudo bash rclshark/rclshark/install.bash foxy
 ```
 

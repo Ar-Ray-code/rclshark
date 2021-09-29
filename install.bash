@@ -54,6 +54,7 @@ else
     # $1 is not directory ? -> error
     else
         echo "options failed ('sudo bash ./install.bash ros_install_dir(/opt/ros/foxy)' or 'sudo bash ./install.bash uninstall')"
+    fi
 fi
 
 ## INSTALL =============================================

@@ -1,6 +1,6 @@
 # rclshark​ :turtle::shark:
 
-latest : [v1.0.2](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.2)
+latest : [v1.0.3](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.3)
 
 [解説（Zenn）](https://zenn.dev/array/articles/9fd8cb5941bb94)
 
@@ -32,6 +32,7 @@ rclsharkはセットアップされたデバイスに対してIPアドレス固�
 ## Support
 
 - Ubuntu 20.04 (x86_64, Armv8) (Full support)
+- Raspberry Pi OS (aarch64) (Full support)
 - Windows 11 (x86_64) (rclshark-smi only)
 
 
@@ -70,7 +71,7 @@ After installation, rclshark will start automatically.
 ```bash
 #rclshark installation
 git clone https://github.com/Ar-Ray-code/rclshark.git
-sudo bash rclshark/rclshark/install.bash foxy
+sudo bash rclshark/rclshark/install.bash /opt/ros/foxy
 ```
 
 If you want to enable rclshark immediately, run  `$ sudo systemctl start rclshark.service`.
@@ -132,7 +133,7 @@ rclshark-smi is installed with rclshark. It can also be built and used as a regu
 ```bash
 ## Install
 git clone --recursive https://github.com/Ar-Ray-code/rclshark.git
-sudo bash rclshark/rclshark/install.bash foxy
+sudo bash rclshark/rclshark/install.bash /opt/ros/foxy
 ## Run rclshark-smi
 rclshark-smi
 ```

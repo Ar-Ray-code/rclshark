@@ -22,13 +22,13 @@ RCLSHARK_WS=${INSTALL_DIR}'/'${TARGET_DIR}'_ws'
 ## Check superuser ======================================
 if [ $(id -u) -ne 0 ]; then
     echo "You must execute this command as a superuser."
-    echo "sudo bash ./install.bash \$ROS_DISTRO' or 'sudo bash ./install.bash uninstall'"
+    echo "sudo bash ./install.bash ros_install_dir(/opt/ros/foxy)' or 'sudo bash ./install.bash uninstall'"
     exit 1
 fi
 
 ## UNINSTALL =============================================
 if [ $# -ne 1 ]; then
-    echo "options failed ('sudo bash ./install.bash \$ROS_DISTRO' or 'sudo bash ./install.bash uninstall')"
+    echo "options failed ('sudo bash ./install.bash ros_install_dir(/opt/ros/foxy)' or 'sudo bash ./install.bash uninstall')"
     exit 1
 fi
 
@@ -48,12 +48,17 @@ if [ "uninstall" = $1 ]; then
     echo "uninstalled"
     exit 0
 else 
-    source /opt/ros/$1/setup.bash
+    # $1 is directory ? 
+    if [ -d $1 ]; then
+        source $1/setup.bash
+    # $1 is not directory ? -> error
+    else
+        echo "options failed ('sudo bash ./install.bash ros_install_dir(/opt/ros/foxy)' or 'sudo bash ./install.bash uninstall')"
 fi
 
 ## INSTALL =============================================
 if [ -z $ROS_DISTRO ]; then
-    echo "options failed ('sudo bash ./install.bash \$ROS_DISTRO' or 'sudo bash ./install.bash uninstall')"
+    echo "options failed ('sudo bash ./install.bash ros_install_dir(/opt/ros/foxy)' or 'sudo bash ./install.bash uninstall')"
     exit 1
 fi
 

@@ -183,10 +183,7 @@ Access `http://localhost:5000`
 ![rclshark-web-gui](images_for_readme/rclshark-web-gui.png)
 
 
+## About author
 
+![](images_for_readme/author_description.PNG)
 
-## About writer :turtle::shark:
-
-- Ar-Ray : Japanese student.
-- Blog (Japanese) : https://ar-ray.hatenablog.com/
-- Twitter : https://twitter.com/Ray255Ar

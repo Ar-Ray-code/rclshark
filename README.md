@@ -8,11 +8,7 @@ latest : [v1.0.3](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.3)
 
 Monitor the status of computers on a network using the DDS function of ROS2.
 
-開発者向けのツールで、リモートマシンへのSSHログインの際に必要なローカルIPアドレスを簡単に発見します。リモートマシンに対して拡張機能を追加し、CPU温度などのマシン内部の情報をログイン無しでモニタリングすることもできます。
-
-rclsharkはセットアップされたデバイスに対してIPアドレス固定などのデバイスごとの面倒なセットアップ無しにIPアドレスの取得を行い、デバイスの状態を取得することができます。インストールも簡単で、組み込みコンピュータの新規開発のお供として役に立ちます。
-
-<img src="images_for_readme/rclshark_swim.png" alt="rclshark_swim"  />
+![rclshark-title](images_for_readme/rclshark-title.png)
 
 ## Documents
 

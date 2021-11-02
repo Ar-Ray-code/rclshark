@@ -72,6 +72,18 @@ sudo bash rclshark/rclshark/install.bash /opt/ros/foxy
 
 If you want to enable rclshark immediately, run  `$ sudo systemctl start rclshark.service`.
 
+#### Stop rclshark
+
+```bash
+sudo systemctl stop rclshark.service
+```
+
+#### Disable rclshark
+
+```bash
+sudo systemctl disable rclshark.service
+```
+
 #### uninstall
 
 ```bash
@@ -182,5 +194,8 @@ Access `http://localhost:5000`
 
 ## About author
 
-![](images_for_readme/author_description.png)
+- author : [Ar-Ray](https://github.com/Ar-Ray-code)
+- [Twitter](https://twitter.com/Ray255Ar)
+
+ <!-- ![](images_for_readme/author_description.png) -->
 

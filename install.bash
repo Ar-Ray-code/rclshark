@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # How to execute (Install) 
-# sudo bash ./install.bash $ROS_DISTRO
+# sudo bash ./install.bash <ros2-installed-dir>
 
 # How to execute (Uninstall)
 # sudo bash ./install.bash uninstall

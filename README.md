@@ -122,7 +122,7 @@ ros2 service list | grep endcb
 
 Now you can safely forget your IP address.:wink:
 
-
+<!-- rosidl generate -o gen -t py -I$(ros2 pkg prefix --share std_msgs)/.. -->
 
 ## 2. rclshark-smi (v1.0.0)​ :turtle: :shark:
 

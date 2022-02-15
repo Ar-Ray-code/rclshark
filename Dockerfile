@@ -29,7 +29,7 @@ RUN colcon mixin add default \
 
 # install ros2 packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-foxy-ros-base=0.9.2-1* \
+    ros-foxy-ros-core \
     && rm -rf /var/lib/apt/lists/*
 
 # RCLSHARK SETUP ===============================================================

@@ -1,4 +1,4 @@
-# computer_msgs (v1.0.0)
+# rclshark_msgs (v1.0.0)
 
 For rclshark
 
@@ -26,5 +26,5 @@ For rclshark
 
 #### Callback
 
-- callback_status (computer_msgs/PcStatus) : Status of the target server computer.
+- callback_status (rclshark_msgs/PcStatus) : Status of the target server computer.
 

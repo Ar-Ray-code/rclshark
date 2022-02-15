@@ -1,8 +1,5 @@
 #!/bin/python3
-from ast import arg
-from numpy import int32, uint8
 import rclpy
-from rclpy.logging import get_logger
 from rclpy.node import Node
 
 # from computer_msgs.msg import PcStatus
@@ -13,9 +10,11 @@ import netifaces as ni
 import ipaddress
 import psutil
 import os
-import socket
 
 import argparse
+
+logger_flag = False
+
 # ----------------------------------------
 
 class get_ip_for_rclshark():
@@ -41,7 +40,10 @@ class get_ip_for_rclshark():
         try:
             user_name = os.environ.get("USER")
         except AssertionError:
-        # user_name (string) is empty on docker
+            pass
+        
+        # user_name is none
+        if type(user_name) == type(None):
             user_name = "docker"
 
         return "rsk"+ipv4_hex+"_"+user_name.replace(" ","_").replace(".","_").replace("-","_")
@@ -82,30 +84,30 @@ class pub_status(Node):
         parser.add_argument('--const-ipv4', type=str, default="", help='ipv4 address')
         args = parser.parse_args()
 
-        self.const_ip = False
-        self.interface_set = False
+        self.const_ip_flag = False
+        self.interface_set_flag = False
 
-        self.const_ip = str()
+        self.const_ipv4 = str()
         self.interface = str()
 
         # get ipv4 address
         if args.const_ipv4 != "":
-            self.const_ip = args.const_ipv4
+            self.const_ipv4 = args.const_ipv4
             self.ip_get_str = args.const_ipv4
-            const_ip = True
-            interface_set = False
+            self.const_ip_flag = True
+            self.interface_set_flag = False
         
         if args.interface != "":
             self.interface = args.interface
             self.ip_get_str = self.ipv4_class.ip_get_str_using_socket_name(self.interface)
-            const_ip = False
-            interface_set = True
+            self.const_ip_flag = False
+            self.interface_set_flag = True
 
-        if not( const_ip or interface_set ):
+        if not( self.const_ip_flag or self.interface_set_flag ):
             self.ip_get_str = self.ipv4_class.ip_get_str()
             print("auto setting ipv4 address: "+self.ip_get_str)
-            const_ip = False
-            interface_set = False
+            self.const_ip_flag = False
+            self.interface_set_flag = False
 
         # ros init
         super().__init__(self.ipv4_class.ip_get_with_namespace(self.ip_get_str),enable_rosout=False)        
@@ -126,17 +128,20 @@ class pub_status(Node):
         status.cpu_percent = int(psutil.cpu_percent(interval=0.5))
         
         # IP address
-        if self.interface_set:
+        if self.interface_set_flag:
             status.ipv4_address_str = self.ipv4_class.ip_get_str_using_socket_name(self.interface)
             status.ipv4_address = int(ipaddress.IPv4Address(status.ipv4_address_str))
         
-        elif self.const_ip:
-            status.ipv4_address_str = self.const_ip
+        elif self.const_ip_flag:
+            status.ipv4_address_str = self.const_ipv4
             status.ipv4_address = int(ipaddress.IPv4Address(status.ipv4_address_str))
         
         else:
             status.ipv4_address_str = self.ipv4_class.ip_get_str()
             status.ipv4_address = int(ipaddress.IPv4Address(status.ipv4_address_str))
+
+        if logger_flag:
+            print("ipv4 address: "+status.ipv4_address_str)
         
         # RAM usage
         status.mem_percent = int(psutil.virtual_memory().percent)

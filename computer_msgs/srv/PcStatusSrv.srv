@@ -1,4 +1,0 @@
-int8 system_ctrl
-int16 ctrl_param
----
-computer_msgs/PcStatus callback_status

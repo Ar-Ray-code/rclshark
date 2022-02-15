@@ -9,7 +9,7 @@ find_package(std_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/PcStatus.msg"
-  "srv/PcStatusSrv.srv"
+  # "srv/PcStatusSrv.srv"
 )
 
 ament_export_dependencies(rosidl_default_runtime)

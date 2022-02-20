@@ -1,5 +1,7 @@
 # rclshark​ :turtle::shark:
 
+[rclshark2](https://github.com/Ar-Ray-code/rclshark2) is released.
+
 latest : [v1.0.3](https://github.com/Ar-Ray-code/rclshark/releases/tag/v1.0.3)
 
 [解説（Zenn）](https://zenn.dev/array/articles/9fd8cb5941bb94)
